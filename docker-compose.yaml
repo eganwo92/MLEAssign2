@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  airflow:
+    build: .
+    container_name: assignment2_airflow
+    restart: always
+    environment:
+      - AIRFLOW_HOME=/opt/airflow
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__WEBSERVER__PORT=8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./utils:/opt/airflow/utils
+      - ./data:/opt/airflow/data
+      - ./datamart:/opt/airflow/datamart
+      - ./model_store:/opt/airflow/model_store
+      - ./main.py:/opt/airflow/main.py
+    command: >
+      bash -c "
+      airflow db init &&
+      airflow users create --username admin --password admin --firstname a --lastname b --role Admin --email admin@example.com &&
+      airflow webserver -p 8080 & airflow scheduler
+      "
