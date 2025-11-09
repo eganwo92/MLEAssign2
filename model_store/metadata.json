@@ -1,0 +1,10 @@
+{
+  "model_name": "best_model.pkl",
+  "trained_until": "2025-11-09 05:34:30",
+  "rows_trained": 10040,
+  "metrics": {
+    "accuracy": 0.7964,
+    "roc_auc": 0.8222
+  },
+  "version": "v20251109_053430"
+}
